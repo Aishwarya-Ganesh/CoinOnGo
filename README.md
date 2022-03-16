@@ -1,2 +1,2 @@
 # CoinOnGo
-IIMT4601 Information Systems Project Management project
+IIMT4601 Information Systems Project Management
