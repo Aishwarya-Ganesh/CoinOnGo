@@ -1,89 +1,292 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<!doctype html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/9.6.9/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/9.6.9/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/9.6.9/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/9.6.9/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/9.6.9/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/9.6.9/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/9.6.9/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/9.6.9/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/9.6.9/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/9.6.9/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+	<link rel="shortcut icon" href="wallet-icon.png">
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+	<meta name="description" content="" />
+	<meta name="keywords" content="bootstrap, bootstrap5" />
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
+	<link rel="stylesheet" href="css/icons/icomoon/style.css">
+
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/tiny-slider.css">
+	<link rel="stylesheet" href="css/glightbox.min.css">
+	<link rel="stylesheet" href="css/aos.css">
+	<link rel="stylesheet" href="css/style.css">
+
+
+
+	<title>CoinOnGo &mdash; Smartest Way to Choose a Hot Wallet</title>
+</head>
+<body>
+
+	<div class="site-mobile-menu site-navbar-target">
+		<div class="site-mobile-menu-header">
+			<div class="site-mobile-menu-close">
+				<span class="icofont-close js-menu-toggle"></span>
+			</div>
+		</div>
+		<div class="site-mobile-menu-body"></div>
+	</div>
+
+	<nav class="site-nav">
+		<div class="container">
+			<div class="site-navigation">
+				<a href="index.html" class="logo m-0 float-left">CoinOnGo</a>
+
+				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
+					<li class="active"><a href="index.html">Home</a></li>
+					<li><a href="survey.html">Survey</a><li>
+					<li><a href="gallery.html">Wallet Gallery</a></li>
+					<li><a href="techEd.html">TechEd</a></li>
+					<li><a href="stats.html">Crypto Stats</a></li>
+					<li><a href="about.html">About</a></li>
+				</ul>
+
+
+				<a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light" data-toggle="collapse" data-target="#main-navbar">
+					<span></span>
+				</a>
+
+			</div>
+		</div>
+	</nav>
+
+
+
+
+	<div class="section-hero">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 mx-auto text-center hero-intro">
+
+					<h1>The Smartest Way to Choose the Hot Wallet for Your Needs</h1>
+					<div class="masthead mb-5">
+						<p>We are here to help you navigate the world of Cryptocurrency wallets and networks. </p>
+					</div>
+					<p><a href="survey.html" class="btn btn-primary">Take Our Survey</a></p>
+
+					<div class="persons-1">
+						<img src="images/Bitcoin-icon.png" alt="Image" class="img-fluid">
+					</div>
+					<div class="persons-2">
+						<img src="images/Ethereum-icon.png" alt="Image" class="img-fluid">
+					</div>
+
+				</div>		
+			</div>		
+		</div>	
+
+		<div class="container">
+			<div class="box">
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="d-lg-flex feature">
+							<div>
+								<span class="icon-account_balance_wallet"></span>
+							</div>
+							<div>
+								<h3>Wallets</h3>
+								<p>We provide hot wallet and blockchain network recommendations that suit your investment needs.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="d-lg-flex feature">
+							<div>
+								<span class="icon-database"></span>
+							</div>
+							<div>
+								<h3>Crypto Stats</h3>
+								<p>Find out the most up-to-date stats on Crypto prices.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="d-lg-flex feature">
+							<div>
+								<span class="icon-key"></span>
+							</div>
+							<div>
+								<h3>TechEd</h3>
+								<p>Access trustworthy educational materials on Cryptocurrency.</p>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>	
+	</div>
+
+
+	<div class="section why-us-section">
+		<div class="container">
+			<div data-aos="fade-up">
+			<div class="row justify-content-between">
+				<div class="col-lg-5">
+					<h2 class="heading mb-5 text-black">Get Started with Our Survey</h2>
+					<div class="d-flex feature-2">
+						<div class="icon">
+							<img src="images/svg/server.svg" alt="Image" class="img-fluid">
+						</div>
+						<div>
+							<h3>Tell Us Your Needs</h3>
+							<p>Fill in our questionnare that takes your investment budget, target subcategory, purpose and more.</p>
+						</div>
+					</div>
+
+					<div class="d-flex feature-2">
+						<div class="icon">
+							<img src="images/svg/good-review.svg" alt="Image" class="img-fluid">
+						</div>
+						<div>
+							<h3>Get Recommendations</h3>
+							<p>Sit back and let us generate the recommended wallets that are suitable to your needs.</p>
+						</div>
+					</div>		
+				</div>
+				<div class="col-lg-6">
+					<p><img src="images/Home-main.png" alt="Image" class="img-fluid"></p>
+				</div>		
+			</div>	
+			</div>	
+		</div>		
+	</div>
+
+
+	<div class="section bg-white">
+		<div class="container">
+			<div data-aos="fade-up">
+			<div class="row justify-content-between align-items-center mb-5 pb-5">
+				<div class="col-lg-4">
+					<h2 class="heading mb-4 text-black">Explore Our Wallet Gallery</h2>
+					<p>View the complete array of the industry's widely used hot wallets along with each of their description for your reference.</p>
+					<p class="mt-4"><a href="gallery.html" class="btn btn-primary">Explore Now</a></p>
+				</div>
+				<div class="col-lg-7">
+					<img src="images/illustration-1.jpg" alt="Image" class="img-fluid">
+				</div>		
+			</div>
+
+
+			<div class="row justify-content-between align-items-center mt-5 pt-5">
+				<div class="col-lg-4 order-lg-2 mb-4 mb-lg-0">
+					<h2 class="heading mb-4 text-black">Get Educated on Crypto</h2>
+					<p>We act as a centralized gateway to information on the web related to cryptocurrency, wallets, and blockchain.</p>
+					<ul class="list-unstyled ul-check">
+						<li>Trustworthy educational materials on Cryptocurrency</li>
+						<li>Available for advanced and amateur Crypto investors</li>
+						<li>Partnership with qualified Crypto educators</li>
+					</ul>
+					<p class="mt-4"><a href="techEd.html" class="btn btn-primary">Learn More</a></p>
+				</div>
+				<div class="col-lg-7">
+
+					<a  href="https://www.youtube.com/watch?v=KI2lsdXJQ40" class="button-play-video glightbox">
+						<span class="icon-play"></span>
+						<img src="images/hero-min.jpg" alt="Image" class="img-fluid">
+					</a>
+				</div>		
+			</div>
+		</div>
+		</div>		
+	</div>
+
+
+
+	<div class="section bg-white">
+		<div class="container">
+			<div class="row mb-5 text-center">
+				<div class="col-7 mx-auto text-center">
+					<h2 class="heading mb-3 text-black">Crypto Stats</h2>
+					<p>Find out about the latest Cryptocurrency price and stats.</p>
+					<p class="mt-4"><a href="stats.html" class="btn btn-primary">View Stats</a></p>
+
+				</div>
+			</div>
+			</div>
+		</div>
+	
+
+
+
+
+	<div class="site-footer">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="widget">
+						<h3>About CoinOnGo<span class="text-primary">.</span> </h3>
+						<p>The smartest way to choose the hot wallet for your needs.</p>
+
+						<ul class="list-unstyled social mt-4">
+							<li><a href="#"><span class="icon-instagram"></span></a></li>
+							<li><a href="#"><span class="icon-twitter"></span></a></li>
+							<li><a href="#"><span class="icon-facebook"></span></a></li>
+							<li><a href="#"><span class="icon-linkedin"></span></a></li>
+							<li><a href="#"><span class="icon-pinterest"></span></a></li>
+							<li><a href="#"><span class="icon-dribbble"></span></a></li>
+						</ul>
+
+					</div> <!-- /.widget -->
+					
+
+				</div> <!-- /.col-lg-3 -->
+
+				<div class="col-lg-2 ml-auto">
+					<div class="widget">
+						<h3>Company</h3>
+						<ul class="list-unstyled float-left links">
+							<li><a href="techEd.html">TechEd</a></li>
+							<li><a href="about.html">About us</a></li>
+						</ul>
+					</div> <!-- /.widget -->
+				</div> <!-- /.col-lg-3 -->
+
+
+				<div class="col-lg-3">
+					<div class="widget">
+						<h3>Get in Touch</h3>
+						<address>The University of Hong Kong, Pokfulam, Hong Kong</address>
+						<ul class="list-unstyled links mb-4">
+							<li><a href="tel://85228592111">+852 28592111</a></li>
+							<li><a href="mailto:info@mydomain.com">info@mydomain.com</a></li>
+						</ul>
+					</div> <!-- /.widget -->
+				</div> <!-- /.col-lg-3 -->
+
+			</div> <!-- /.row -->
+
+	
+		</div> <!-- /.container -->
+	</div> <!-- /.site-footer -->
+
+	<!-- Preloader -->
+	<div id="overlayer"></div>
+	<div class="loader">
+		<div class="spinner-border text-primary" role="status">
+			<span class="visually-hidden">Loading...</span>
+		</div>
+	</div>
+
+
+
+	<script src="js/bootstrap.bundle.min.js"></script>
+	<script src="js/tiny-slider.js"></script>
+	<script src="js/aos.js"></script>
+	<script src="js/navbar.js"></script>
+	<script src="js/counter.js"></script>
+	<script src="js/glightbox.min.js"></script>
+
+	<script src="js/custom.js"></script>
+</body>
 </html>
