@@ -1,0 +1,69 @@
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+    .modal-content-new {
+    background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 65px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.modal-button {
+  color: #fff;
+  background-color: #f85a40;
+  border-color: #f85a40; }
+  .modal-button:hover {
+    color: #fff;
+    background-color: #6960ce;
+    border-color: #6960ce; }
+  .btn-check:focus + .modal-button, .modal-button:focus {
+    color: #fff;
+    background-color: #6960ce;
+    border-color: #6960ce;
+    -webkit-box-shadow: 0 0 0 0.25rem rgba(38, 150, 137, 0.5);
+    box-shadow: 0 0 0 0.25rem rgba(38, 150, 137, 0.5); }
+ 
+
+   
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #756be5;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
