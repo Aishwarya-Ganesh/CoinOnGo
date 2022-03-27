@@ -100,7 +100,7 @@
 					width: auto;
 				}
 				.stats thead {
-					font-size: 12;
+					font-size: 15px;
 				}
 				.stats td {
 					height: 40px;
@@ -136,6 +136,7 @@
 				}
 
 			</style>
+			<p></p>
 			<table class="stats" id="stats">
 				<thead>
 					<tr>
@@ -168,9 +169,14 @@
 			var sparklineData;
 
 
-			function numToUSD(number){
-				return new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 4}).format(number);
+			function numToUSDPrice(number){
+				return new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 8}).format(number);
 			}
+
+			function numToUSD(number){
+				return new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 2}).format(number);
+			}
+
 
 			function thousandSeparator(number) {
 				return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -208,7 +214,7 @@
 						"<tr clas'cryptocurrency'>" +
 							"<th class='rank'>" + (i+1) + "</th>" +
 							"<td class='name'> <img src ='" + cryptocurrencies[i].image + "' width='20'> " + cryptocurrencies[i].name.bold() + " " + cryptocurrencies[i].symbol.toUpperCase().fontcolor("grey") +"</td>" +
-							"<td class='price'>" + numToUSD(cryptocurrencies[i].price) + "</td>" +
+							"<td class='price'>" + numToUSDPrice(cryptocurrencies[i].price) + "</td>" +
 							"<td class='percentage_change_24h'>" + cryptocurrencies[i].percentage_change_24h + "% </td>" +
 							"<td class='market_cap'>" + numToUSD(cryptocurrencies[i].market_cap) + "</td>" +
 							"<td class='circulating_supply'>" + thousandSeparator(cryptocurrencies[i].circulating_supply) + "</td>" +
