@@ -98,9 +98,13 @@
 			<style>
 				.stats {
 					width: auto;
+					border-collapse: collapse;
 				}
 				.stats thead {
-					font-size: 15px;
+					font-size: 14px;
+				}
+				.stats tr {
+					border-bottom: 0.5pt solid lightgray;
 				}
 				.stats td {
 					height: 40px;
@@ -120,7 +124,7 @@
 					text-align: right;
 				}
 				.circulating_supply {
-					width: 170px;
+					width: 150px;
 					text-align: right;
 				}
 				.volume_24h {
@@ -213,7 +217,7 @@
 					var $item = $(
 						"<tr clas'cryptocurrency'>" +
 							"<th class='rank'>" + (i+1) + "</th>" +
-							"<td class='name'> <img src ='" + cryptocurrencies[i].image + "' width='20'> " + cryptocurrencies[i].name.bold() + " " + cryptocurrencies[i].symbol.toUpperCase().fontcolor("grey") +"</td>" +
+							"<td class='name'> <img src ='" + cryptocurrencies[i].image + "' width='20'> " + cryptocurrencies[i].name.bold() + " " + cryptocurrencies[i].symbol.toUpperCase().fontcolor("grey").fontsize(1.5) +"</td>" +
 							"<td class='price'>" + numToUSDPrice(cryptocurrencies[i].price) + "</td>" +
 							"<td class='percentage_change_24h'>" + cryptocurrencies[i].percentage_change_24h + "% </td>" +
 							"<td class='market_cap'>" + numToUSD(cryptocurrencies[i].market_cap) + "</td>" +
