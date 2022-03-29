@@ -1,4 +1,16 @@
-const firebase = require("firebase");
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
+
+// Initialize Cloud Firestore through Firebase
+const firebaseApp = initializeApp({
+  apiKey: '### FIREBASE API KEY ###',
+  authDomain: '### FIREBASE AUTH DOMAIN ###',
+  projectId: '### CLOUD FIRESTORE PROJECT ID ###'
+});
+
+const db = getFirestore();
+/*const firebase = require("firebase");
 // Required for side-effects\
 require("firebase/firestore");
 
@@ -14,4 +26,4 @@ db.collection("result").get().then((querySnapshot) => {
   querySnapshot.forEach((doc) => {
     console.log(`${doc.id} => ${doc.data()}`);
     });
-});
+});*/
