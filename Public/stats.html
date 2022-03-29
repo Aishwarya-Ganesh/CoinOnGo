@@ -72,16 +72,8 @@
 					<h1>Crypto Stats</h1>
 					<div class="masthead mb-5">
 						<p>Stay updated on the most recent Crypto prices and data.</p>
-						<p> Last updated: <span id="dateTime"></span></p>
+						<!--<button><a href="stats.html" style="color: black;"> Cryptocurrency Price</a></button> <button><a href="stats_onchain.html" style="color: black;">On-chain Data</a></button>-->
 					</div>
-					<script>
-						var today = new Date();
-						var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-						var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-						var dateTime = date+' '+time
-						document.getElementById("dateTime").innerHTML=dateTime;
-					</script>
-
 
 				</div>		
 			</div>		
@@ -105,9 +97,6 @@
 				.stats tr {
 					border-bottom: 0.5pt solid lightgray;
 				}
-				.stats td {
-					height: 40px;
-				}
 				.rank {
 					width: 60px;
 				}
@@ -123,29 +112,48 @@
 					text-align: right;
 				}
 				.circulating_supply {
-					width: 150px;
+					width: 140px;
 					text-align: right;
 				}
 				.volume_24h {
 					width: 140px;
 					text-align: right;
 				}
+				.percentage_change_1h {
+					width: 80px;
+					text-align: right;
+				}
 				.percentage_change_24h {
-					width: 100px;
+					width: 80px;
 					text-align: right;
 				}
 				.stats th {
 					text-align: center;
 				}
+				.sparkline {
+					width: 140px;
+				}
+				.chartBox {
+					width: 120px;
+					height: 50px;
+				}
 
 			</style>
-			<p></p>
+			<p style="font-size: 24px;"><b>Cryptocurrency Price by Market Cap</b> <span style="font-size: 12px; color: grey;"> (Last updated: <span id="dateTime"></span>)</p>
+			<script>
+				var today = new Date();
+				var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+				var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+				var dateTime = date+' '+time
+				document.getElementById("dateTime").innerHTML=dateTime;
+			</script>
 			<table class="stats" id="stats">
 				<thead>
 					<tr>
 						<th class="rank">Rank</abbr></th>
 						<th class="name">Name</th>
 						<th class="price">Price (USD)</th>
+						<th class="percentage_change_1h">1h</th>
 						<th class="percentage_change_24h">24h</th>
 						<th class="market_cap">Market Cap</th>
 						<th class="circulating_supply">Circulating Supply</th>
@@ -158,82 +166,134 @@
 				</tbody>
 			</table>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
-		<script>
-			// fetch the cryptocurrency data and store it inside the variable called data
-			var xhReq = new XMLHttpRequest();
-			xhReq.open("GET","https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&sparkline=true&price_change_percentage=1h%2C%2024h%2C%207d", false)
-			xhReq.send(null);
-			var data = JSON.parse(xhReq.responseText);
+			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+			<script>
+				// fetch the cryptocurrency data and store it inside the variable called data
+				var xhReq = new XMLHttpRequest();
+				xhReq.open("GET","https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h", false)
+				xhReq.send(null);
+				var data = JSON.parse(xhReq.responseText);
 
-			console.log(data[0]);
+				console.log(data[0]);
 
-			// initialization
-			var cryptocurrencies;
-			var sparklineData;
-
-
-			function numToUSDPrice(number){
-				return new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 8}).format(number);
-			}
-
-			function numToUSD(number){
-				return new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 2}).format(number);
-			}
+				// initialization
+				var cryptocurrencies;
 
 
-			function thousandSeparator(number) {
-				return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-			}
+				function numToUSD(number){
+					return new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 4}).format(number);
+				}
 
-			function getData(){
-				var $list = $("#cryptocurrencies");
-				$list.find(".cryptocurrency").remove();
+				function thousandSeparator(number) {
+					return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				}
 
-				cryptocurrencies = [];
-				for(let i=0; i<250; i++){
-					cryptocurrencies.push(
-						{
-							image: data[i].image,
-							name: data[i].name,
-							symbol: data[i].symbol,
-							price: data[i].current_price,
-							percentage_change_24h: Math.round((data[i].market_cap_change_percentage_24h + Number.EPSILON) * 100) / 100,
-							market_cap: data[i].market_cap,
-							circulating_supply: Math.round(data[i].circulating_supply),
-							volume_24h: data[i].total_volume,
-							sparkline: data[i].sparkline_in_7d,
+				var chartDivName;
+
+				chartDivName = [];
+				for(var i=0;i<data.length;i++){
+					chartDivName.push('chart_'+i)
+				}
+				
+				function getData(){
+					var $list = $("#cryptocurrencies");
+					$list.find(".cryptocurrency").remove();
+
+					cryptocurrencies = [];
+					for(let i=0; i<data.length; i++){
+						cryptocurrencies.push(
+							{
+								image: data[i].image,
+								name: data[i].name,
+								symbol: data[i].symbol,
+								price: data[i].current_price,
+								percentage_change_1h: Math.round((data[i].price_change_percentage_1h_in_currency + Number.EPSILON) * 100) / 100,
+								percentage_change_24h: Math.round((data[i].price_change_percentage_24h + Number.EPSILON) * 100) / 100,
+								market_cap: data[i].market_cap,
+								circulating_supply: Math.round(data[i].circulating_supply),
+								volume_24h: data[i].total_volume,
+								sparkline: data[i].sparkline_in_7d.price,
+							}
+						)
+					}
+
+					for(var i=0;i<cryptocurrencies.length;i++){
+						var $item = $(
+							"<tr clas'cryptocurrency'>" +
+								"<th class='rank'>" + (i+1) + "</th>" +
+								"<td class='name'> <img src ='" + cryptocurrencies[i].image + "' width='20'> " + cryptocurrencies[i].name.bold() + " " + cryptocurrencies[i].symbol.toUpperCase().fontcolor("grey") +"</td>" +
+								"<td class='price'>" + numToUSD(cryptocurrencies[i].price) + "</td>" +
+								"<td class='percentage_change_1h'>" + cryptocurrencies[i].percentage_change_1h + "% </td>" +
+								"<td class='percentage_change_24h'>" + cryptocurrencies[i].percentage_change_24h + "% </td>" +
+								"<td class='market_cap'>" + numToUSD(cryptocurrencies[i].market_cap) + "</td>" +
+								"<td class='circulating_supply'>" + thousandSeparator(cryptocurrencies[i].circulating_supply) + "</td>" +
+								"<td class='volume_24h'>" + numToUSD(cryptocurrencies[i].volume_24h) + "</td>" +
+								"<td align='center'><div class='chartBox'> <canvas id='" + chartDivName[i] + "'></canvas></div> </td>" +
+
+							"</tr>" 
+						);
+						cryptocurrencies[i].$item = $item;
+						$list.append($item);
+					}
+				}
+				getData();
+				
+				for(var i=0;i<250;i++) {
+					var str = "chart_" + i;
+					const labels = [
+					'January',
+					'February',
+					'March',
+				];
+				
+				const chartData = {
+					labels: cryptocurrencies[i].sparkline,
+					datasets: [{
+					label: 'My First dataset',
+					backgroundColor: 'rgb(0, 0, 0)',
+					borderColor: 'rgb(0, 0, 0)',
+					borderWidth: 1,
+					pointRadius: 0,
+					data: cryptocurrencies[i].sparkline,
+					}]
+				};
+				
+
+				const config = {
+					type: 'line',
+					data: chartData,
+					options: {
+						events: [],
+						maintainAspectRatio: false,
+						plugins: {
+							legend: {
+								display: false
+							},
+							tooltip: {
+								enabled: false
+							}
+						},
+						scales: {
+							xAxis: {
+								display: false
+							},
+							yAxis: {
+								display: false
+							}
 						}
-					)
+					}
+				};
+
+				const myChart = new Chart(
+					document.getElementById(str),
+					config
+				);
+
 				}
-
-				sparklineData = [];
-				for(var i=0;i<cryptocurrencies.length;i++){
-					sparklineData.push(data[i].sparkline_in_7d.price)
-				}
-
-
-				for(var i=0;i<cryptocurrencies.length;i++){
-					var $item = $(
-						"<tr clas'cryptocurrency'>" +
-							"<th class='rank'>" + (i+1) + "</th>" +
-							"<td class='name'> <img src ='" + cryptocurrencies[i].image + "' width='20'> " + cryptocurrencies[i].name.bold() + " " + cryptocurrencies[i].symbol.toUpperCase().fontcolor("grey").fontsize(1.5) +"</td>" +
-							"<td class='price'>" + numToUSDPrice(cryptocurrencies[i].price) + "</td>" +
-							"<td class='percentage_change_24h'>" + cryptocurrencies[i].percentage_change_24h + "% </td>" +
-							"<td class='market_cap'>" + numToUSD(cryptocurrencies[i].market_cap) + "</td>" +
-							"<td class='circulating_supply'>" + thousandSeparator(cryptocurrencies[i].circulating_supply) + "</td>" +
-							"<td class='volume_24h'>" + numToUSD(cryptocurrencies[i].volume_24h) + "</td>" +
-							"<td> </td>" +
-
-						"</tr>" 
-					);
-					cryptocurrencies[i].$item = $item;
-					$list.append($item);
-				}
-			}
-
-			getData();
-		
-		</script>
+							
+			</script>
+			<p></p>
+			<!--insert page numbers here-->>
 		</div>
 	</div>
 
