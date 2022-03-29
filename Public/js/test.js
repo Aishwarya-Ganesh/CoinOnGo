@@ -20,7 +20,7 @@ const db = getFirestore();
 
 const snapshot = await db.collection('Wallet_DB').get();
 
-alert(snapshot);
+console.log(snapshot);
 
 //snapshot.forEach((doc) => {
 //  console.log(doc.id, '=>', doc.data());
