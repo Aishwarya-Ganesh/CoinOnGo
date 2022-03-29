@@ -4,9 +4,9 @@ import { getFirestore } from "firebase/firestore";
 
 // Initialize Cloud Firestore through Firebase
 const firebaseApp = initializeApp({
-  apiKey: '### FIREBASE API KEY ###',
-  authDomain: '### FIREBASE AUTH DOMAIN ###',
-  projectId: '### CLOUD FIRESTORE PROJECT ID ###'
+  apiKey: "AIzaSyD2vioD8VxyJb7KOTzFEDe8SQNbUoNPFlI",
+  authDomain: "coinongo-6b06e.firebaseapp.com",
+  projectId: "coinongo-6b06e",
 });
 
 const db = getFirestore();
