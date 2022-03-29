@@ -28,10 +28,12 @@ const querySnapshot = await getDocs(collection(db, "result"));
 querySnapshot.forEach((doc) => {
   console.log(`${doc.id} => ${doc.data()}`);
 });
+
+
 function printout() {
   console.log("test, and etstA")
 
 }
 
-init();
+
 printout();
