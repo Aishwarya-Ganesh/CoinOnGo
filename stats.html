@@ -112,7 +112,7 @@
 					text-align: right;
 				}
 				.circulating_supply {
-					width: 140px;
+					width: 190px;
 					text-align: right;
 				}
 				.volume_24h {
@@ -226,7 +226,7 @@
 								"<td class='percentage_change_1h'>" + cryptocurrencies[i].percentage_change_1h + "% </td>" +
 								"<td class='percentage_change_24h'>" + cryptocurrencies[i].percentage_change_24h + "% </td>" +
 								"<td class='market_cap'>" + numToUSD(cryptocurrencies[i].market_cap) + "</td>" +
-								"<td class='circulating_supply'>" + thousandSeparator(cryptocurrencies[i].circulating_supply) + "</td>" +
+								"<td class='circulating_supply'>" + thousandSeparator(cryptocurrencies[i].circulating_supply) + " " + cryptocurrencies[i].symbol.toUpperCase() + "</td>" +
 								"<td class='volume_24h'>" + numToUSD(cryptocurrencies[i].volume_24h) + "</td>" +
 								"<td align='center'><div class='chartBox'> <canvas id='" + chartDivName[i] + "'></canvas></div> </td>" +
 
