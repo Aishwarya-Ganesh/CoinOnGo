@@ -1,3 +1,6 @@
+import { Web3 } from 'web3';
+// const Web3 = require('web3');
+
 
 const networks =
 {'Ethereum Mainnet': {'name': 'Ethereum Mainnet',
@@ -204,4 +207,4 @@ const connectWalletHandler = async () => {
 }
 
 
-// export {addToNetwork, connectWalletHandler};
+export {addToNetwork, connectWalletHandler};

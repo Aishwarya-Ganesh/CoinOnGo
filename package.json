@@ -1,6 +1,25 @@
 {
   "dependencies": {
     "firebase": "^9.6.10",
-    "firebase-admin": "^10.0.2"
-  }
+    "firebase-admin": "^10.0.2",
+    "web3": "^1.7.3"
+  },
+  "name": "coinongo",
+  "description": "IIMT4601 Information Systems Project Management",
+  "version": "1.0.0",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aishwarya-Ganesh/CoinOnGo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aishwarya-Ganesh/CoinOnGo/issues"
+  },
+  "homepage": "https://github.com/Aishwarya-Ganesh/CoinOnGo#readme"
 }
