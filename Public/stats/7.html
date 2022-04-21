@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="shortcut icon" href="../wallet-icon.png">
+
+	<meta name="description" content="" />
+	<meta name="keywords" content="bootstrap, bootstrap5" />
+	
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="../css/icons/icomoon/style.css">
+
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<link rel="stylesheet" href="../css/tiny-slider.css">
+	<link rel="stylesheet" href="../css/glightbox.min.css">
+	<link rel="stylesheet" href="../css/aos.css">
+	<link rel="stylesheet" href="../css/style.css">
+
+
+
+	<title>CoinOnGo &mdash; Smartest Way to Choose a Hot Wallet</title>
+</head>
+<body>
+
+	<div class="site-mobile-menu site-navbar-target">
+		<div class="site-mobile-menu-header">
+			<div class="site-mobile-menu-close">
+				<span class="icofont-close js-menu-toggle"></span>
+			</div>
+		</div>
+		<div class="site-mobile-menu-body"></div>
+	</div>
+
+
+	<nav class="site-nav">
+		<div class="container">
+			<div class="site-navigation">
+				<a href="../index.html" class="logo m-0 float-left">CoinonGo</a>
+				
+				
+				<a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light" data-toggle="collapse" data-target="#main-navbar">
+					<span></span>
+				</a>
+
+				<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
+					<ul class="js-clone-nav d-none d-lg-inline-block text-left site-menu float-right">
+					<li><a href="../index.html">Home</a></li>
+					<li><a href="../survey.html">Survey</a><li>
+					<li><a href="../gallery.html">Wallet Gallery</a></li>
+					<li><a href="../network.html">Blockchain Networks</a></li>
+					<li><a href="../techEd.html">TechEd</a></li>
+					<li class="active"><a href="../stats.html">Crypto Stats</a></li>
+					<li><a href="../about.html">About</a></li>
+				</ul>
+
+				
+
+			</div>
+		</div>
+	</nav>
+
+
+
+
+	<div class="section-hero section-hero-inner">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 mx-auto text-center hero-intro">
+
+					<h1>Crypto Stats</h1>
+					<div class="masthead mb-5">
+						<p>Stay updated on the most recent Crypto prices and data.</p>
+						
+					</div>
+
+				</div>		
+			</div>		
+		</div>	
+
+		
+	</div>
+
+
+
+
+	<div class="container" style="overflow-x: auto;">
+		<style>
+			.stats {
+				width: 100%;
+				border-collapse: collapse;
+			}
+			.stats thead {
+				font-size: 14px;
+			}
+			.stats tr {
+				border-bottom: 0.5pt solid lightgray;
+			}
+			.rank {
+				width: auto;
+			}
+			.name {
+				width: auto;
+			}
+			.price {
+				width: auto;
+				text-align: right;
+			}
+			.market_cap {
+				width: auto;
+				text-align: right;
+			}
+			.circulating_supply {
+				width: auto;
+				text-align: right;
+			}
+			.volume_24h {
+				width: auto;
+				text-align: right;
+			}
+			.percentage_change_1h {
+				width: auto;
+				text-align: right;
+			}
+			.percentage_change_24h {
+				width: auto;
+				text-align: right;
+			}
+			.stats th {
+				text-align: center;
+			}
+			.sparkline {
+				width: 140px;
+			}
+			.chartBox {
+				width: 120px;
+				height: 50px;
+			}
+			.pagination_center {
+				text-align: center;
+			}
+			.pagination {
+				display: inline-block;
+			}
+
+			.pagination a {
+				color: black;
+				float: left;
+				padding: 8px 16px;
+				text-decoration: none;
+			}
+
+			.pagination a.active {
+				background-color: #f85a40;
+				color: white;
+				border-radius: 5px;
+			}
+
+			.pagination a:hover:not(.active) {
+				background-color: #ddd;
+				border-radius: 5px;
+			}
+		</style>
+		<p style="font-size: 24px;"><b>Cryptocurrency Price by Market Cap</b> <span style="font-size: 12px; color: grey;"> (Last updated: <span id="dateTime"></span>)</p>
+		<script>
+			var today = new Date();
+			var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+			var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+			var dateTime = date+' '+time
+			document.getElementById("dateTime").innerHTML=dateTime;
+		</script>
+		<table class="stats" id="stats">
+			<thead>
+				<tr>
+					<th class="rank">Rank</abbr></th>
+					<th class="name">Name</th>
+					<th class="price">Price (USD)</th>
+					<th class="percentage_change_1h">1h</th>
+					<th class="percentage_change_24h">24h</th>
+					<th class="market_cap">Market Cap</th>
+					<th class="circulating_supply">Circulating Supply</th>
+					<th class="volume_24h">Volume (24h)</th>
+					<th class="sparkline">Last 7 Days</th>
+				</tr>
+			</thead>
+			<tbody id="cryptocurrencies">
+	
+			</tbody>
+		</table>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script>
+			// fetch the cryptocurrency data and store it inside the variable called data
+			var xhReq = new XMLHttpRequest();
+			xhReq.open("GET","https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=7&sparkline=true&price_change_percentage=1h", false)
+			xhReq.send(null);
+			var data = JSON.parse(xhReq.responseText);
+
+			console.log(data[0]);
+
+			// initialization
+			var cryptocurrencies;
+
+
+			function numToUSD(number){
+				return new Intl.NumberFormat('en-US', {style: 'currency',currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 4}).format(number);
+			}
+
+			function thousandSeparator(number) {
+				return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			}
+
+			var chartDivName;
+
+			chartDivName = [];
+			for(var i=0;i<data.length;i++){
+				chartDivName.push('chart_'+i)
+			}
+			
+			function getData(){
+				var $list = $("#cryptocurrencies");
+				$list.find(".cryptocurrency").remove();
+
+				cryptocurrencies = [];
+				for(let i=0; i<data.length; i++){
+					cryptocurrencies.push(
+						{
+							image: data[i].image,
+							name: data[i].name,
+							symbol: data[i].symbol,
+							price: data[i].current_price,
+							percentage_change_1h: Math.round((data[i].price_change_percentage_1h_in_currency + Number.EPSILON) * 100) / 100,
+							percentage_change_24h: Math.round((data[i].price_change_percentage_24h + Number.EPSILON) * 100) / 100,
+							market_cap: data[i].market_cap,
+							circulating_supply: Math.round(data[i].circulating_supply),
+							volume_24h: data[i].total_volume,
+							sparkline: data[i].sparkline_in_7d.price,
+						}
+					)
+				}
+
+				for(var i=0;i<cryptocurrencies.length;i++){
+					var $item = $(
+						"<tr clas'cryptocurrency'>" +
+							"<th class='rank'>" + (i+1+250*6) + "</th>" +
+							"<td class='name'> <img src ='" + cryptocurrencies[i].image + "' width='20'> " + cryptocurrencies[i].name.bold() + " " + cryptocurrencies[i].symbol.toUpperCase().fontcolor("grey") +"</td>" +
+							"<td class='price'>" + numToUSD(cryptocurrencies[i].price) + "</td>" +
+							"<td class='percentage_change_1h'>" + cryptocurrencies[i].percentage_change_1h + "% </td>" +
+							"<td class='percentage_change_24h'>" + cryptocurrencies[i].percentage_change_24h + "% </td>" +
+							"<td class='market_cap'>" + numToUSD(cryptocurrencies[i].market_cap) + "</td>" +
+							"<td class='circulating_supply'>" + thousandSeparator(cryptocurrencies[i].circulating_supply) + " " + cryptocurrencies[i].symbol.toUpperCase() + "</td>" +
+							"<td class='volume_24h'>" + numToUSD(cryptocurrencies[i].volume_24h) + "</td>" +
+							"<td align='center'><div class='chartBox'> <canvas id='" + chartDivName[i] + "'></canvas></div> </td>" +
+
+						"</tr>" 
+					);
+					cryptocurrencies[i].$item = $item;
+					$list.append($item);
+				}
+			}
+			getData();
+
+			for(var i=0;i<data.length;i++) {
+				var str = "chart_" + i;
+				const labels = [];
+			
+			const chartData = {
+				labels: cryptocurrencies[i].sparkline,
+				datasets: [{
+				label: 'My dataset',
+				backgroundColor: 'rgb(0, 0, 0)',
+				borderColor: 'rgb(0, 0, 0)',
+				borderWidth: 1,
+				pointRadius: 0,
+				data: cryptocurrencies[i].sparkline,
+				}]
+			};
+			
+
+			const config = {
+				type: 'line',
+				data: chartData,
+				options: {
+					events: [],
+					maintainAspectRatio: false,
+					plugins: {
+						legend: {
+							display: false
+						},
+						tooltip: {
+							enabled: false
+						}
+					},
+					scales: {
+						xAxis: {
+							display: false
+						},
+						yAxis: {
+							display: false
+						}
+					}
+				}
+			};
+
+			const myChart = new Chart(
+				document.getElementById(str),
+				config
+			);
+
+			}
+						
+		</script>
+		<p></p>
+		<div class="pagination_center">
+			<div class="pagination">
+				<a href="6.html">Prev</a>
+				<a href="../stats.html">1</a>
+				<a>...</a>
+				<a href="6.html">6</a>
+				<a class="active">7</a>
+				<a href="8.html">8</a>
+				<a href="9.html">9</a>
+				<a href="10.html">10</a>
+				<a>...</a>
+				<a href="55.html">55</a>
+				<a href="8.html">Next</a>
+			</div>
+		</div>
+		<p></p>
+	</div>
+
+
+
+	
+
+	<div class="site-footer">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="widget">
+						<h3>About CoinOnGo<span class="text-primary">.</span> </h3>
+						<p>The smartest way to choose the hot wallet for your needs.</p>
+
+						<ul class="list-unstyled social mt-4">
+							<li><a href="#"><span class="icon-instagram"></span></a></li>
+							<li><a href="#"><span class="icon-twitter"></span></a></li>
+							<li><a href="#"><span class="icon-facebook"></span></a></li>
+							<li><a href="#"><span class="icon-linkedin"></span></a></li>
+							<li><a href="#"><span class="icon-pinterest"></span></a></li>
+							<li><a href="#"><span class="icon-dribbble"></span></a></li>
+						</ul>
+
+					</div> <!-- /.widget -->
+					
+
+				</div> <!-- /.col-lg-3 -->
+
+				<div class="col-lg-2 ml-auto">
+					<div class="widget">
+						<h3>Company</h3>
+						<ul class="list-unstyled float-left links">
+							<li><a href="../techEd.html">TechEd</a></li>
+							<li><a href="../about.html">About us</a></li>
+						</ul>
+					</div> <!-- /.widget -->
+				</div> <!-- /.col-lg-3 -->
+
+
+				<div class="col-lg-3">
+					<div class="widget">
+						<h3>Get in Touch</h3>
+						<address>The University of Hong Kong, Pokfulam, Hong Kong</address>
+						<ul class="list-unstyled links mb-4">
+							<li><a href="tel://85228592111">+852 28592111</a></li>
+							<li><a href="mailto:info@mydomain.com">info@mydomain.com</a></li>
+						</ul>
+					</div> <!-- /.widget -->
+				</div> <!-- /.col-lg-3 -->
+
+			</div> <!-- /.row -->
+
+	
+		</div> <!-- /.container -->
+	</div> <!-- /.site-footer -->
+
+	<!-- Preloader -->
+	<div id="overlayer"></div>
+	<div class="loader">
+		<div class="spinner-border text-primary" role="status">
+			<span class="visually-hidden">Loading...</span>
+		</div>
+	</div>
+
+
+
+	<script src="../js/bootstrap.bundle.min.js"></script>
+	<script src="../js/tiny-slider.js"></script>
+	<script src="../js/aos.js"></script>
+	<script src="../js/navbar.js"></script>
+	<script src="../js/counter.js"></script>
+	<script src="../js/glightbox.min.js"></script>
+
+	<script src="../js/custom.js"></script>
+</body>
+</html>
