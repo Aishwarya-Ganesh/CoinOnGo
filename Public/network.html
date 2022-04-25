@@ -22,9 +22,6 @@
     <link rel="import" href="node_modules/redux">
     <link rel="import" href="node_modules/to-hex/index.js">
 
-
-
-
 	<script type="module" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 
     
@@ -221,8 +218,6 @@
                 const chainId = await web3.eth.getChainId();
                 const accounts = await web3.eth.getAccounts();
 
-                // const accounts = await ethereum.request({ method: 'eth_accounts' });
-
                 if (walletProvider !== window.ethereum) {
                     console.error("No Ethereum browser detected! Connect to correct network.");
                 }
@@ -233,7 +228,6 @@
                     .then((result) => {
                         // successful response would contain current account address in its element of first index in result array
                         console.log(result);
-                        // walletLoginThunk(walletProvider, chainId, accounts, result[0]);
                         /* TO DO: display the result code on the button */
                         walletbtn.innerText = result;
                     })
@@ -464,7 +458,6 @@
 	<script src="js/custom.js"></script>
 	<!-- JS for modal-->
 
-	
 
 
 </body>
